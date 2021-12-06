@@ -17,3 +17,6 @@ about your latest repos, but it can be edited to do way more. This uses the Gith
 # To do
 - add more functions?
 - add testing
+
+# Notes
+This is made to be an automated script, so a Windows app like Task Scheduler should be able to run it whenever (if you have the computer on whenever it's suppose to run I think)
