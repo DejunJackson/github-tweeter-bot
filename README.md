@@ -20,3 +20,5 @@ about your latest repos, but it can be edited to do way more. This uses the Gith
 
 # Notes
 This is made to be an automated script, so a Windows app like Task Scheduler should be able to run it whenever (if you have the computer on whenever it's suppose to run I think)
+[Here](https://datatofish.com/python-script-windows-scheduler/) is a good guide on how to turn script into a batch file and automating it with Task Scheduler for Windows PC.
+I have also included my batch file as a reference.

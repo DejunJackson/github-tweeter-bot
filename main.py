@@ -7,6 +7,7 @@ import config
 client = tweepy.Client(bearer_token=config.bearer_token, consumer_key=config.consumer_key,
                        consumer_secret=config.consumer_secret, access_token=config.access_token, access_token_secret=config.access_token_secret)
 
+
 # Gets the URL for my github repo
 # replace with your own
 url = config.url
@@ -14,9 +15,6 @@ headers = {"Accept": "application/vnd.github.v3+json"}
 r = requests.get(url, headers=headers)
 response = r.json()
 
-# defines the number of current repos you started at as of now and the number of repos you have at time of request
-base_num_of_repos = 27
-current_num_of_repos = len(response)
 
 # parses all of my repos and gets the latest one
 def get_latest_repo_date():
@@ -35,13 +33,20 @@ def get_latest_repo():
 
     return latest_repo
 
-# if you have more tweets than the base number, it gets the latest tweet and tweets stats about it
+# gets repo info and tweets the formatted tweet
 def tweet_about_latest_new_repo():
-    if current_num_of_repos > base_num_of_repos:
-        repo = get_latest_repo()
-    client.create_tweet(
-        text=f"Hi, I'm Dejun's Github Assistant and he created another repo!\nFeel free to look around or maybe contribute a few lines of code!\n\nName: {repo['name']}\nDescription: {repo['description']}\nMost Used Language: {repo['language']}\nURL: {repo['html_url']}")
+    repo = get_latest_repo()
 
+    # change to fit what format you want
+    current_tweet = f"Hi, I'm Dejun's Github Assistant and he created another repo!\nFeel free to look around or maybe contribute a few lines of code!\n\nName: {repo['name']}\nDescription: {repo['description']}\nMost Used Language: {repo['language']}\nURL: {repo['html_url']}"
+
+    #checks the recent tweets to make sure name, description, and language are not the same as current tweet (replace config.id with your twitter id)
+    tweets = client.get_users_tweets(config.id, exclude=['retweets', 'replies'])
+    for tweets in tweets.data:
+        if str(repo['name']) in tweets.text and str(repo['description']) in tweets.text and str(repo['language']) in tweets.text:
+            return
+        
+    client.create_tweet(text=current_tweet)
 
 if __name__ == "__main__":
     tweet_about_latest_new_repo()
