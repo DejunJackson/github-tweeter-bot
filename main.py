@@ -38,7 +38,7 @@ def tweet_about_latest_new_repo():
     repo = get_latest_repo()
 
     # change to fit what format you want
-    current_tweet = f"Hi, I'm Dejun's Github Assistant and he created another repo!\nFeel free to look around or maybe contribute a few lines of code!\n\nName: {repo['name']}\nDescription: {repo['description']}\nMost Used Language: {repo['language']}\nURL: {repo['html_url']}"
+    current_tweet = f"Hi, I'm Dejun's Github Assistant and he created another repo!\nFeel free to contribute a few lines of code!\n\nName: {repo['name']}\nDescription: {repo['description']}\nMost Used Language: {repo['language']}\nURL: {repo['html_url']}"
 
     #checks the recent tweets to make sure name, description, and language are not the same as current tweet (replace config.id with your twitter id)
     tweets = client.get_users_tweets(config.id, exclude=['retweets', 'replies'])

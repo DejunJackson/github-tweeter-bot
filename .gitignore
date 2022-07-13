@@ -11,5 +11,4 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
 config.py
